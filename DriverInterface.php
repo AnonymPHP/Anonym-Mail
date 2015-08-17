@@ -27,11 +27,19 @@ interface DriverInterface
     public function send();
 
     /**
+     * register the message subject
+     *
+     * @param string $subject the subject of message
+     * @return $this
+     */
+    public function subject($subject = '');
+
+    /**
      * Set the address information sent by mail.
      *
      * @param string $mail the address of mail
      * @param string $name the real name of mail sender
-     * @return mixed
+     * @return $this
      */
     public function from($mail, $name);
 
@@ -40,7 +48,7 @@ interface DriverInterface
      *
      * @param string|array $mail the address of mail
      * @param null|string $name the real name of mail receiver
-     * @return mixed
+     * @return $this
      */
     public function to($mail, $name = null);
 
@@ -48,16 +56,16 @@ interface DriverInterface
      * register the message body
      *
      * @param string $body the message body
-     * @return mixed
+     * @param string $contentType the type of message content
+     * @return $this
      */
-    public function body($body = '');
-
+    public function body($body = '', $contentType = 'text/html');
 
     /**
      * add a attachment to message
      *
      * @param  $attachment the attachment
-     * @return mixed
+     * @return $this
      */
     public function attach($attachment);
 
@@ -66,7 +74,7 @@ interface DriverInterface
      *
      * @param string|array $mail the address of mail
      * @param null $name the realname
-     * @return mixed
+     * @return $this
      */
     public function bcc($mail, $name = null);
 
@@ -74,7 +82,7 @@ interface DriverInterface
      * register the address to send a reply message
      *
      * @param string $address
-     * @return mixed
+     * @return $this
      */
     public function returnPath($address = '');
 }
