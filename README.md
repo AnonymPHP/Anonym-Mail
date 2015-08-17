@@ -1,2 +1,4 @@
 # Anonym-Mail
-AnonymFramework Mail Component
+
+the mail component of Anonym Framework.
+
