@@ -10,19 +10,8 @@
 
 namespace Anonym\Components\Mail;
 
-/**
- * the component of mail
- *
- * Class Mail
- * @package Anonym\Components\Mail
- */
-class Mail
+
+class SwiftMailerDriver implements DriverInterface
 {
 
-    /**
-     * the instance of mail driver
-     *
-     * @var DriverInterface
-     */
-    private $driver;
 }
