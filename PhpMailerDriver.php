@@ -10,7 +10,12 @@
 
 namespace Anonym\Components\Mail;
 
-
+/**
+ * the driver of phpmailer for AnonymFramework mail component
+ *
+ * Class PhpMailerDriver
+ * @package Anonym\Components\Mail
+ */
 class PhpMailerDriver
 {
 
