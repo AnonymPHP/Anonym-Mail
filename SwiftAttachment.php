@@ -17,7 +17,7 @@ use Swift_Attachment;
  * Class SwiftAttachment
  * @package Anonym\Components\Mail
  */
-class SwiftAttachment
+class SwiftAttachment implements SwiftAttachmentDInterface
 {
 
     /**

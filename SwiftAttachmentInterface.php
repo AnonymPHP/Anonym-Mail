@@ -14,7 +14,7 @@ namespace Anonym\Components\Mail;
  * Interface SwiftAttachmentDInterface
  * @package Anonym\Components\Mail
  */
-interface SwiftAttachmentDInterface
+interface SwiftAttachmentInterface
 {
 
     /**

@@ -113,7 +113,11 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function attach($attachment)
     {
-        // do nothing for now
+         if($attachment instanceof SwiftAttachment)
+         {
+             $attachment = $attachment->getAttach();
+         }
+
     }
 
     /**
