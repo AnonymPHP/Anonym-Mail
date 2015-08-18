@@ -39,6 +39,7 @@ class SwiftMailerDriver implements DriverInterface
 
     /**
      * create a new instance
+     *
      * @param array $configs the configs of driver, example : username, password vs.
      */
     public function __construct(array $configs = [])
@@ -76,7 +77,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function from($mail, $name)
     {
-        $this->message = $this->message->addFrom($mail, $name);
+        $this->message->addFrom($mail, $name);
         return $this;
     }
 
@@ -89,7 +90,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function to($mail, $name = null)
     {
-        $this->message = $this->message->addTo($mail, $name);
+        $this->message->addTo($mail, $name);
         return $this;
     }
 
@@ -102,7 +103,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function body($body = '', $contentType = 'text/html')
     {
-        $this->message = $this->message->setBody($body, $contentType);
+        $this->message->setBody($body, $contentType);
         return $this;
     }
 
@@ -137,7 +138,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function bcc($mail, $name = null)
     {
-        $this->message = $this->message->addBcc($mail, $name);
+        $this->message->addBcc($mail, $name);
         return $this;
     }
 
@@ -149,7 +150,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function returnPath($address = '')
     {
-        $this->message = $this->message->setReturnPath($address);
+        $this->message->setReturnPath($address);
         return $this;
     }
 
@@ -161,7 +162,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function subject($subject = '')
     {
-        $this->message = $this->message->setSubject($subject);
+        $this->message->setSubject($subject);
         return $this;
     }
 }

@@ -50,7 +50,8 @@ class Mail
      * @param string $driver the name of driver
      * @param array $configs the configs for driver
      * @throws DriverException
-     * @return DriverInterface|bool if driver name isset in driver list, return the driver instance, else return false
+     * @throws DriverNotInstalledException
+     * @return DriverInterface if driver name isset in driver list, return the driver instance, else return false
      */
     public function driver($driver = '', array $configs = [])
     {
