@@ -49,6 +49,7 @@ class Mail
      *
      * @param string $driver the name of driver
      * @param array $configs the configs for driver
+     * @throws DriverException
      * @return DriverInterface|bool if driver name isset in driver list, return the driver instance, else return false
      */
     public function driver($driver = '', array $configs = [])
@@ -60,7 +61,11 @@ class Mail
 
             if ($driver instanceof DriverInterface) {
                 return $driver;
+            } else {
+                throw new DriverException(sprintf('your %s driver has not Driver Interface', get_class($driver)));
             }
+        } else {
+            throw new DriverNotInstalledException(sprintf('your %s driver is not installed', $driver));
         }
 
     }
