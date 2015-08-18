@@ -36,6 +36,7 @@ class SwiftMailerDriver implements DriverInterface
      * @var Swift_Mailer
      */
     private $mailer;
+
     /**
      * create a new instance
      * @param array $configs the configs of driver, example : username, password vs.
@@ -43,17 +44,17 @@ class SwiftMailerDriver implements DriverInterface
     public function __construct(array $configs = [])
     {
 
-        $host = isset($configs['host']) ? $configs['host']: '';
-        $port = isset($configs['port']) ? $configs['port']: 25;
+        $host = isset($configs['host']) ? $configs['host'] : '';
+        $port = isset($configs['port']) ? $configs['port'] : 25;
         $username = isset($configs['username']) ? $configs['username'] : '';
-        $password = isset($configs['password']) ? $configs['password']: '';
+        $password = isset($configs['password']) ? $configs['password'] : '';
 
         $transport = Swift_SmtpTransport::newInstance($host, $port)
             ->setUsername($username)
             ->setPassword($password);
 
         $this->mailer = Swift_Mailer::newInstance($transport);
-        $this->message  = Swift_Message::newInstance();
+        $this->message = Swift_Message::newInstance();
     }
 
     /**
@@ -63,7 +64,7 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function send()
     {
-        return (bool) $this->mailer->send($this->message);
+        return (bool)$this->mailer->send($this->message);
     }
 
     /**
@@ -113,10 +114,17 @@ class SwiftMailerDriver implements DriverInterface
      */
     public function attach($attachment)
     {
-         if($attachment instanceof SwiftAttachment)
-         {
-             $attachment = $attachment->getAttach();
-         }
+
+        if (is_string($attachment)) {
+            $attachment = new SwiftAttachment($attachment);
+        }
+
+        if ($attachment instanceof SwiftAttachmentInterface) {
+            $attachment = $attachment->getAttach();
+        }
+
+        $this->message->attach($attachment);
+        return $this;
 
     }
 

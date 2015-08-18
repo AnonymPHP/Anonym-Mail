@@ -25,4 +25,62 @@ class Mail
      * @var DriverInterface
      */
     private $driver;
+
+    /**
+     * the list of driver list
+     *
+     * @var array
+     */
+    private $defaultDriverList;
+
+    /**
+     * create a new instance and register the default driver list
+     *
+     */
+    public function __construct()
+    {
+        $this->defaultDriverList = [
+            'swift' => SwiftMailerDriver::class
+        ];
+    }
+
+    /**
+     * select a driver
+     *
+     * @param string $driver the name of driver
+     * @param array $configs the configs for driver
+     * @return DriverInterface|bool if driver name isset in driver list, return the driver instance, else return false
+     */
+    public function driver($driver = '', array $configs = [])
+    {
+        $driverList = $this->defaultDriverList;
+        if (isset($driverList[$driver])) {
+            $driver = $driverList[$driver];
+            $driver = new $driver($configs);
+
+            if ($driver instanceof DriverInterface) {
+                return $driver;
+            }
+        }
+
+    }
+
+    /**
+     * @return DriverInterface
+     */
+    public function getDriver()
+    {
+        return $this->driver;
+    }
+
+    /**
+     * @param DriverInterface $driver
+     * @return Mail
+     */
+    public function setDriver(DriverInterface $driver)
+    {
+        $this->driver = $driver;
+        return $this;
+    }
+
 }
