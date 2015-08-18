@@ -10,13 +10,144 @@
 
 namespace Anonym\Components\Mail;
 
+use PHPMailer;
 /**
  * the driver of phpmailer for AnonymFramework mail component
  *
  * Class PhpMailerDriver
  * @package Anonym\Components\Mail
  */
-class PhpMailerDriver
+class PhpMailerDriver implements DriverInterface
 {
 
+    /**
+     * the instance of mail driver
+     *
+     * @var PHPMailer
+     */
+    private $mailer;
+
+    /**
+     * create a new instance and register the configs
+     *
+     * @param array $configs the configs for phpmailer driver
+     */
+    public function __construct(array $configs = [])
+    {
+        $host = isset($configs['host']) ? $configs['host'] : '';
+        $username = isset($configs['username']) ? $configs['username'] : '';
+        $password = isset($configs['password']) ? $configs['password'] : '';
+        $port = isset($configs['port']) ? $configs['port'] : 25;
+        $secure = isset($configs['secure']) ? $configs['secure'] : 'tsl';
+        $phpmailer = new PHPMailer(false);
+        $phpmailer->isSMTP();
+        $phpmailer->Host = $host;
+        $phpmailer->Port = $port;
+        $phpmailer->Username = $username;
+        $phpmailer->Password = $password;
+        $phpmailer->SMTPSecure = $secure;
+        $phpmailer->isHTML(true);
+
+        $this->mailer = $phpmailer;
+    }
+
+    /**
+     * send the prepared mail content.
+     *
+     * @return bool
+     */
+    public function send()
+    {
+        // TODO: Implement send() method.
+    }
+
+    /**
+     * register the message subject
+     *
+     * @param string $subject the subject of message
+     * @return $this
+     */
+    public function subject($subject = '')
+    {
+        $this->mailer->Subject = $subject;
+        return $this;
+    }
+
+    /**
+     * Set the address information sent by mail.
+     *
+     * @param string $mail the address of mail
+     * @param string $name the real name of mail sender
+     * @return $this
+     */
+    public function from($mail, $name = null)
+    {
+        $this->mailer->setFrom($mail, $name);
+        return $this;
+    }
+
+    /**
+     * set the address information to be send
+     *
+     * @param string|array $mail the address of mail
+     * @param null|string $name the real name of mail receiver
+     * @return $this
+     */
+    public function to($mail, $name = null)
+    {
+        $this->mailer->addAddress($mail, $name);
+        return $this;
+    }
+
+    /**
+     * register the message body
+     *
+     * @param string $body the message body
+     * @param string $contentType the type of message content
+     * @return $this
+     */
+    public function body($body = '', $contentType = 'text/html')
+    {
+        $this->mailer->Body = $body;
+        $this->mailer->ContentType = $contentType;
+        return $this;
+    }
+
+    /**
+     * add a attachment to message
+     *
+     * @param  $attachment the attachment
+     * @return $this
+     */
+    public function attach($attachment)
+    {
+
+    }
+
+    /**
+     * register a new bcc
+     *
+     * @param string|array $mail the address of mail
+     * @param null $name the realname
+     * @return $this
+     */
+    public function bcc($mail, $name = null)
+    {
+        $this->mailer->addBCC($mail, $name);
+        return $this;
+    }
+
+    /**
+     * register the address to send a reply message
+     *
+     * @param string $address
+     * @param string name
+     * @return $this
+     */
+    public function returnPath($address = '', $name = '')
+    {
+        $this->mailer->addReplyTo($address, $name);
+        return $this;
+
+    }
 }
