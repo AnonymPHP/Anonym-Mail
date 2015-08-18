@@ -116,11 +116,23 @@ class PhpMailerDriver implements DriverInterface
     /**
      * add a attachment to message
      *
-     * @param  $attachment the attachment
+     * @param  PhpMailerAttachment|string|array $attachment the attachment
      * @return $this
      */
     public function attach($attachment)
     {
+
+        // if string
+        if (is_string($attachment)) {
+            $attachment = [$attachment, ''];
+        }
+
+        // if array
+        if (is_array($attachment)) {
+            list($name, $type) = $attachment;
+        }
+
+
 
     }
 
