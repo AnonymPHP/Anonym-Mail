@@ -11,6 +11,7 @@
 namespace Anonym\Components\Mail;
 
 use PHPMailer;
+
 /**
  * the driver of phpmailer for AnonymFramework mail component
  *
@@ -132,7 +133,13 @@ class PhpMailerDriver implements DriverInterface
             list($name, $type) = $attachment;
         }
 
+        if ($attachment instanceof PhpMailerAttachmentInterface) {
+            $name = $attachment->getFile();
+            $type = $attachment->getType();
+        }
 
+        $this->mailer->addAttachment($name, $name, 'base64', $type);
+        return $this;
 
     }
 
