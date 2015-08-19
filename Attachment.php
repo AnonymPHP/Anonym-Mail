@@ -17,4 +17,28 @@ namespace Anonym\Components\Mail;
 abstract class Attachment
 {
 
+    /**
+     * the new name of file
+     *
+     * @var string
+     */
+    private $newName;
+
+    /**
+     * @return string
+     */
+    public function getNewName()
+    {
+        return $this->newName;
+    }
+
+    /**
+     * @param string $newName
+     * @return Attachment
+     */
+    public function setNewName($newName)
+    {
+        $this->newName = $newName;
+        return $this;
+    }
 }
