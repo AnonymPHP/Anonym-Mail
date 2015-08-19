@@ -14,7 +14,7 @@ namespace Anonym\Components\Mail;
  * Class Attachment
  * @package Anonym\Components\Mail
  */
-abstract class Attachment
+abstract class Attachment implements AttachmentInterface
 {
 
     /**
