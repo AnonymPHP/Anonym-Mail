@@ -165,4 +165,17 @@ class SwiftMailerDriver implements DriverInterface
         $this->message->setSubject($subject);
         return $this;
     }
+
+    /**
+     * call the all methods in message variable
+     *
+     * @param string $method
+     * @param array $args
+     * @return $this
+     */
+    public function __call($method, $args)
+    {
+        call_user_func_array([$this->message, $method], $args);
+        return $this;
+    }
 }
