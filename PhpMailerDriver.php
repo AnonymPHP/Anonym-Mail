@@ -169,4 +169,17 @@ class PhpMailerDriver implements DriverInterface
         return $this;
 
     }
+
+    /**
+     * call the all methods in mailer variable
+     *
+     * @param string $method
+     * @param array $args
+     * @return $this
+     */
+    public function __call($method, $args)
+    {
+        call_user_func_array([$this->mailer, $method], $args);
+        return $this;
+    }
 }
