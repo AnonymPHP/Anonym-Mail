@@ -17,7 +17,7 @@ use Swift_Attachment;
  * Class SwiftAttachment
  * @package Anonym\Components\Mail
  */
-class SwiftAttachment implements SwiftAttachmentDInterface
+class SwiftAttachment extends Attachment implements SwiftAttachmentInterface
 {
 
     /**
@@ -31,11 +31,13 @@ class SwiftAttachment implements SwiftAttachmentDInterface
      * create a new instance with path and file type information
      *
      * @param string $path the path of file
+     * @param string $newName the new name of file
      * @param null $filetype the type of file
      */
-    public function __construct($path = '', $filetype = null)
+    public function __construct($path = '', $newName = null, $filetype = null)
     {
         $this->attach = Swift_Attachment::fromPath($path, $filetype);
+        $this->attach->setFilename($newName);
     }
 
     /**

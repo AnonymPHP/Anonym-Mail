@@ -41,4 +41,17 @@ abstract class Attachment
         $this->newName = $newName;
         return $this;
     }
+
+    /**
+     * create a new instance and register the name and type
+     *
+     * @param string $fileName
+     * @param string|null newName
+     * @param string $type
+     * @return PhpMailerAttachment
+     */
+    public static function create($fileName = '', $newName = null, $type = '')
+    {
+        return new static($fileName, $newName, $type);
+    }
 }

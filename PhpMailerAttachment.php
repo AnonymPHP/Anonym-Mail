@@ -16,7 +16,7 @@ namespace Anonym\Components\Mail;
  * Class PhpMailerAttachment
  * @package Anonym\Components\Mail
  */
-class PhpMailerAttachment
+class PhpMailerAttachment extends Attachment
 {
 
     /**
@@ -37,24 +37,17 @@ class PhpMailerAttachment
      * create a new instance and register the name and type
      *
      * @param string $fileName
+     * @param string|null $newName
      * @param string $type
      */
-    public function __construct($fileName = '', $type = '')
+    public function __construct($fileName = '', $newName = null, $type = '')
     {
         $this->setFile($fileName);
         $this->setType($type);
-    }
 
-    /**
-     * create a new instance and register the name and type
-     *
-     * @param string $fileName
-     * @param string $type
-     * @return PhpMailerAttachment
-     */
-    public static function create($fileName = '', $type = '')
-    {
-        return new static($fileName, $type);
+        if ($newName !== null) {
+            $this->setNewName($newName);
+        }
     }
 
     /**
