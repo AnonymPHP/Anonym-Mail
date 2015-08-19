@@ -27,14 +27,25 @@ interface PhpMailerAttachmentInterface
     public static function create($fileName = '', $type = '');
 
     /**
+     * return the registered file path
+     *
      * @return string
      */
     public function getFile();
 
 
     /**
+     * return the registered types
+     *
      * @return string
      */
     public function getType();
+
+    /**
+     * return the registered new file name
+     *
+     * @return string
+     */
+    public function getNewName();
 
 }
