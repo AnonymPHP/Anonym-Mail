@@ -73,6 +73,18 @@ class Mail
     }
 
     /**
+     * add a driver
+     *
+     * @param string $name the name of driver
+     * @param string $class the class path of driver
+     * @return $this
+     */
+    public function add($name, $class)
+    {
+        $this->defaultDriverList[$name] = $class;
+        return $this;
+    }
+    /**
      * @return DriverInterface
      */
     public function getDriver()
