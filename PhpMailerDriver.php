@@ -59,7 +59,7 @@ class PhpMailerDriver implements DriverInterface
      */
     public function send()
     {
-        // TODO: Implement send() method.
+        return $this->mailer->send();
     }
 
     /**
