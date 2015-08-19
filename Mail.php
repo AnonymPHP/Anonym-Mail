@@ -40,7 +40,8 @@ class Mail
     public function __construct()
     {
         $this->defaultDriverList = [
-            'swift' => SwiftMailerDriver::class
+            'swift'     => SwiftMailerDriver::class,
+            'phpmailer' => PhpMailerDriver::class
         ];
     }
 
