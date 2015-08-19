@@ -48,6 +48,6 @@ $driver->to('href@adress.com', 'href name');
 $driver->returnPath('return@adress.com', 'return name');
 $driver->bcc('bcc@adress.com', 'bcc name'); // add a bcc
 
-$driver->attach('filename');
+$driver->attach('filename.ext');
 
 ```
