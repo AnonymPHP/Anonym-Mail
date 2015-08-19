@@ -134,9 +134,11 @@ class PhpMailerDriver implements DriverInterface
         }
 
         if ($attachment instanceof PhpMailerAttachmentInterface) {
-            $name = $attachment->getFile();
+            $filename = $attachment->getFile();
+            $name = ($attachment->getNewName()) ? $attachment->getNewName() : $filename;
             $type = $attachment->getType();
         }
+
 
         $this->mailer->addAttachment($name, $name, 'base64', $type);
         return $this;
