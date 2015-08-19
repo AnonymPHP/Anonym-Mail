@@ -140,7 +140,7 @@ class PhpMailerDriver implements DriverInterface
         }
 
 
-        $this->mailer->addAttachment($name, $name, 'base64', $type);
+        $this->mailer->addAttachment($filename, $name, 'base64', $type);
         return $this;
 
     }
