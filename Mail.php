@@ -9,7 +9,7 @@
  */
 
 namespace Anonym\Components\Mail;
-
+use Anonym\Facades\Config;
 /**
  * the component of mail
  *
@@ -102,4 +102,20 @@ class Mail
         return $this;
     }
 
+    /**
+     * send the mail with config name and closure callback
+     *
+     * @param string $name
+     * @param callable $callback
+     * @return mixed
+     * @throws DriverException
+     * @throws DriverNotInstalledException
+     */
+    public function send($name = '', callable $callback)
+    {
+        $configs = Config::get($name);
+        $driver = $this->driver(isset($configs['driver']) ? $configs['driver']: 'swift');
+
+        return $callback($driver);
+    }
 }
