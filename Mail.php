@@ -114,7 +114,7 @@ class Mail
     public function send($name = '', callable $callback)
     {
         $configs = Config::get($name);
-        $driver = $this->driver(isset($configs['driver']) ? $configs['driver']: 'swift');
+        $driver = $this->driver(isset($configs['driver']) ? $configs['driver']: 'swift', $configs);
 
         return $callback($driver);
     }
